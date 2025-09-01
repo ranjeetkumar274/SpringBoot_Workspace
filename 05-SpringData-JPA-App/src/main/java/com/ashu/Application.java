@@ -37,7 +37,7 @@ public class Application {
 //		System.out.println("Record is inserted....");
 		
 		
-//		Iterable<Student> findAll = repo.findAll();
+//		Iterable<Student> findAll = repo.findAll();;a;ws/l
 //		
 //		findAll.forEach(s -> System.out.println(s));
 		
@@ -51,9 +51,11 @@ public class Application {
 //		}
 		
 		
-		List<Student> students = repo.findByGender("Female");
-		students.forEach(System.out::println);
+//		List<Student> students = repo.findByGender("Female");
+//		students.forEach(System.out::println);
 		
+		List<Student> studentss = repo.findByRankGreaterThanEqual(1000l);
+		studentss.forEach(System.out::println);
 		
 		
 		
