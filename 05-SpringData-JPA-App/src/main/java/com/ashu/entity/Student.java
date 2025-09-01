@@ -9,6 +9,19 @@ import jakarta.persistence.Table;
 @Table(name="STUDENT_DTLS")
 public class Student {
 	
+	
+	public Student() {
+	}
+	
+	
+	public Student(int id, String name, long rank, String gender) {
+		this.id = id;
+		this.name = name;
+		this.rank = rank;
+		this.gender = gender;
+	}
+	
+
 	@Id
 	@Column(name="STUDENT_ID")
 	private int id;
