@@ -54,7 +54,7 @@ public class Application {
 //		List<Student> students = repo.findByGender("Female");
 //		students.forEach(System.out::println);
 		
-		List<Student> studentss = repo.findByRankGreaterThanEqual(1000l);
+		List<Student> studentss = repo.getStudents();
 		studentss.forEach(System.out::println);
 		
 		
