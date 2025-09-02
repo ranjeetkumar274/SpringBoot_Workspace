@@ -1,5 +1,10 @@
 package com.ashu.entity;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,6 +16,7 @@ public class Student {
 	
 	
 	public Student() {
+		
 	}
 	
 	
@@ -35,7 +41,35 @@ public class Student {
 	@Column(name="STUDENT_GENDER")
 	private String gender;
 	
+	@CreationTimestamp
+	@Column(name = "CREATION_TIME", updatable = false)
+	private LocalDateTime createTime;
 	
+	@UpdateTimestamp
+	@Column(name = "UPDATE_TIME")
+	private LocalDateTime updateTime;
+	
+	
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+
+	public LocalDateTime getUpdateTime() {
+		return updateTime;
+	}
+
+
+	public void setUpdateTime(LocalDateTime updateTime) {
+		this.updateTime = updateTime;
+	}
+
+
 	public int getId() {
 		return id;
 	}

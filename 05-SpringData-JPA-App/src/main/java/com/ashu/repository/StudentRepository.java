@@ -23,8 +23,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	
 	
 	@Query("update Student s set s.rank = :rank where s.id = :id")
-//	@Modifying
-//	@Transactional
+	@Modifying
+	@Transactional
 	public void updateStudentById(@Param("rank") long rank, @Param("id") Integer id);
 
 	
