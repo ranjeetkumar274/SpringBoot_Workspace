@@ -1,11 +1,14 @@
 package com.ashu;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import com.ashu.entity.Student;
 import com.ashu.repository.StudentRepository;
@@ -54,8 +57,22 @@ public class Application {
 //		List<Student> students = repo.findByGender("Female");
 //		students.forEach(System.out::println);
 		
-		List<Student> studentss = repo.getStudents();
-		studentss.forEach(System.out::println);
+//		List<Student> studentss = repo.getStudents();
+//		studentss.forEach(System.out::println);
+		
+		System.out.println(repo.getClass().getName());
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter the page number : ");
+		int pageNo = sc.nextInt();
+		
+		int pageSize = 3;
+		
+		PageRequest pagereq = PageRequest.of(pageNo - 1, pageSize);
+		Page<Student> page = repo.findAll(pagereq);
+		List<Student> students = page.getContent();
+		
+		students.forEach(System.out::println);
 		
 		
 		
