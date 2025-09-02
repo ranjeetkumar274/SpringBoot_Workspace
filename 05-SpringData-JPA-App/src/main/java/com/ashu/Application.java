@@ -6,6 +6,7 @@ import java.util.Scanner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -67,23 +68,30 @@ public class Application {
 		
 //		System.out.println(repo.getClass().getName());
 //		
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter the page number : ");
-		int pageNo = sc.nextInt();
-		
-		int pageSize = 3;
-		
-		Pageable pageable = PageRequest.of(pageNo -1 , 5, Sort.by("rank").ascending());
-		Page<Student> page = repo.findAll(pageable);
-		List<Student> students = page.getContent();
-		
-		students.forEach(System.out::println);
-		
+//		Scanner sc = new Scanner(System.in);
+//		System.out.print("Enter the page number : ");
+//		int pageNo = sc.nextInt();
+//		
+//		int pageSize = 3;
+//		
+//		Pageable pageable = PageRequest.of(pageNo -1 , 5, Sort.by("rank").ascending());
+//		Page<Student> page = repo.findAll(pageable);
+//		List<Student> students = page.getContent();
+//		
+//		students.forEach(System.out::printl€an);
+//		
 		
 //		repo.updateStudentById(100l, 101);
 		
 		
+		Student s = new Student();
+		s.setGender("Male");
+		s.setRank(1000l);
 		
+		Example<Student> ex = Example.of(s);
+		List<Student> students = repo.findAll(ex);
+		
+		students.forEach(System.out::println);
 	}
 
 }

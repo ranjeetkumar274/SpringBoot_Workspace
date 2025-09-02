@@ -15,7 +15,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	
 	public List<Student> findByGender(String gender);
 	
-	public List<Student> findByRankGreaterThanEqual(long rank);
+	public List<Student> findByRankGreaterThanEqual(Long rank);
 	
 	
 	@Query("from Student")   // HQL
@@ -25,7 +25,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	@Query("update Student s set s.rank = :rank where s.id = :id")
 	@Modifying
 	@Transactional
-	public void updateStudentById(@Param("rank") long rank, @Param("id") Integer id);
+	public void updateStudentById(@Param("rank") Long rank, @Param("id") Integer id);
 
 	
 
