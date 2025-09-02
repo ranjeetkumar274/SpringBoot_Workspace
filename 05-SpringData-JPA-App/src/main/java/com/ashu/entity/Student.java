@@ -20,11 +20,12 @@ public class Student {
 	}
 	
 	
-	public Student(int id, String name, Long rank, String gender) {
+	public Student(int id, String name, Long rank, String gender, String activeSw) {
 		this.id = id;
 		this.name = name;
 		this.rank = rank;
 		this.gender = gender;
+		this.activeSw = activeSw;
 	}
 	
 
@@ -41,6 +42,9 @@ public class Student {
 	@Column(name="STUDENT_GENDER")
 	private String gender;
 	
+	@Column(name = "ACTIVE_SW")
+	private String activeSw;
+	
 	@CreationTimestamp
 	@Column(name = "CREATION_TIME", updatable = false)
 	private LocalDateTime createTime;
@@ -48,6 +52,15 @@ public class Student {
 	@UpdateTimestamp
 	@Column(name = "UPDATE_TIME")
 	private LocalDateTime updateTime;
+	
+	public String getActiveSw() {
+		return activeSw;
+	}
+
+
+	public void setActiveSw(String activeSw) {
+		this.activeSw = activeSw;
+	}
 	
 	
 	public LocalDateTime getCreateTime() {
