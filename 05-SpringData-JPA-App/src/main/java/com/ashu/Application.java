@@ -60,19 +60,22 @@ public class Application {
 //		List<Student> studentss = repo.getStudents();
 //		studentss.forEach(System.out::println);
 		
-		System.out.println(repo.getClass().getName());
+//		System.out.println(repo.getClass().getName());
+//		
+//		Scanner sc = new Scanner(System.in);
+//		System.out.print("Enter the page number : ");
+//		int pageNo = sc.nextInt();
+//		
+//		int pageSize = 3;
+//		
+//		PageRequest pagereq = PageRequest.of(pageNo - 1, pageSize);
+//		Page<Student> page = repo.findAll(pagereq);
+//		List<Student> students = page.getContent();
+//		
+//		students.forEach(System.out::println);
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter the page number : ");
-		int pageNo = sc.nextInt();
 		
-		int pageSize = 3;
-		
-		PageRequest pagereq = PageRequest.of(pageNo - 1, pageSize);
-		Page<Student> page = repo.findAll(pagereq);
-		List<Student> students = page.getContent();
-		
-		students.forEach(System.out::println);
+		repo.updateStudentById(1000l, 101);
 		
 		
 		
