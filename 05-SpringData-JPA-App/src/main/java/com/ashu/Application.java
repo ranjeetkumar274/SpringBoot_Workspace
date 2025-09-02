@@ -75,7 +75,7 @@ public class Application {
 //		students.forEach(System.out::println);
 		
 		
-		repo.updateStudentById(1000l, 101);
+		repo.updateStudentById(100l, 101);
 		
 		
 		
