@@ -27,6 +27,8 @@ public class Application {
 		acc.setAccountPK(pk);
 		
 		accountRepo.save(acc);
+		
+		accountRepo.findById(pk).ifPresent(a -> System.out.println(a));
 	}
 
 }

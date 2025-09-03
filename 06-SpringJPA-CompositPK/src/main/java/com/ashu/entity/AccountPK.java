@@ -28,6 +28,8 @@ public class AccountPK implements Serializable{
 	public void setAccNo(Integer accNo) {
 		this.accNo = accNo;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "AccountPK [accId=" + accId + ", accType=" + accType + ", accNo=" + accNo + "]";
