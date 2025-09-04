@@ -22,9 +22,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
-
-	
+    implementation 'javax.servlet:jstl'   // <-- Needed for JSP
+    
+    
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
