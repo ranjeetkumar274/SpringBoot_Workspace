@@ -1,12 +1,34 @@
 package com.ashu.entity;
 
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	
 	private String name;
 	private String email;
 	private Long phno;
 	
 	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 	public String getName() {
 		return name;
 	}
@@ -39,8 +61,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", email=" + email + ", phno=" + phno + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phno=" + phno + "]";
 	}
-	
 	
 }
