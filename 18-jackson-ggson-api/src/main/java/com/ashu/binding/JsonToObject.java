@@ -17,7 +17,6 @@ public class JsonToObject {
 //		System.out.println(p);
 		
 		
-//		Through Gson Api
 		
 		Gson gson = new Gson();
 		Passenger p = gson.fromJson(new FileReader("passenger.json"), Passenger.class);
