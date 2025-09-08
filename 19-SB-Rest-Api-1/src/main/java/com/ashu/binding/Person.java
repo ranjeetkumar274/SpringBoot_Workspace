@@ -1,10 +1,17 @@
 package com.ashu.binding;
 
+import java.time.LocalTime;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Person {
 	
 	private String name;
 	private Integer age;
 	private String city;
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -23,5 +30,14 @@ public class Person {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
+	
+	@Override
+	public String toString() {
+		System.out.println(LocalTime.now());
+		return "Person [name=" + name + ", age=" + age + ", city=" + city + "]";
+	}
+	
+	
 	
 }
