@@ -10,10 +10,13 @@
 	description = 'Demo project for Spring Boot'
 	
 	java {
-		toolchain {
-			languageVersion = JavaLanguageVersion.of(21)
-		}
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
+}
+
+	
+
 	
 	configurations {
 		compileOnly {
@@ -38,3 +41,9 @@
 	tasks.named('test') {
 		useJUnitPlatform()
 	}
+	
+	bootJar {
+    archiveBaseName.set("e-rail")
+    archiveVersion.set("")   // remove version from filename
+    archiveFileName.set("e-rail.jar") // explicitly set final name
+}
