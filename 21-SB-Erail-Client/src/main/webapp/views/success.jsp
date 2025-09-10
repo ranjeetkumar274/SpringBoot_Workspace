@@ -111,7 +111,14 @@
             <td>${ticket.trainNo}</td>
         </tr>
     </table>
+    <span style="display:block; height:20px;"></span>
+
+<a href="/">Book New Ticket</a>
+<span style="display:block; height:10px;"></span>
+<a href="search">Search A Ticket</a>
 </div>
+
+
 
 </body>
 </html>

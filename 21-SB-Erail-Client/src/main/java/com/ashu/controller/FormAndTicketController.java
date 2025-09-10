@@ -23,15 +23,15 @@ public class FormAndTicketController {
 	
 	
 	@GetMapping("/search")
-	public String showSearch() {
-		return "search";
+	public String searchTicket(@RequestParam(value = "pnr", required = false) Long pnr, Model model) {
+	    if (pnr != null) {
+	        System.out.println("PNR: " + pnr);
+	        Ticket ticket = ticketService.getTicketByPnr(pnr);
+	        model.addAttribute("ticket", ticket);
+	    }
+	    return "search"; // show same page with or without result
 	}
-	
-	@GetMapping("/searchticket")
-	public String showTicket(@RequestParam("pnr") long pnr) {
-		System.out.println("PNR: " + pnr);
-		return "search";
-	}
+
 	
 	@GetMapping("/")
 	public String showForm() {
