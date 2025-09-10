@@ -52,5 +52,7 @@
         </table>
     </form>
     
+    <a href="search.jsp">Search Your Tickets</a>
+    
 </body>
 </html>
