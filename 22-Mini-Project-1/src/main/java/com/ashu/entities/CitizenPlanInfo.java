@@ -2,6 +2,8 @@ package com.ashu.entities;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,8 +22,12 @@ public class CitizenPlanInfo {
 	private String gender;
 	private String planName;
 	private String planStatus;
-	private String planStartDate;
-	private String planEndDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate planStartDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate planEndDate;
 	private Double benefitAmount;
 	private String denialReason;
 	private LocalDate terminationDate;
@@ -58,18 +64,7 @@ public class CitizenPlanInfo {
 	public void setPlanStatus(String planStatus) {
 		this.planStatus = planStatus;
 	}
-	public String getPlanStartDate() {
-		return planStartDate;
-	}
-	public void setPlanStartDate(String planStartDate) {
-		this.planStartDate = planStartDate;
-	}
-	public String getPlanEndDate() {
-		return planEndDate;
-	}
-	public void setPlanEndDate(String planEndDate) {
-		this.planEndDate = planEndDate;
-	}
+	
 	public Double getBenefitAmount() {
 		return benefitAmount;
 	}
@@ -98,6 +93,18 @@ public class CitizenPlanInfo {
 	
 	
 	
+	public LocalDate getPlanStartDate() {
+		return planStartDate;
+	}
+	public void setPlanStartDate(LocalDate planStartDate) {
+		this.planStartDate = planStartDate;
+	}
+	public LocalDate getPlanEndDate() {
+		return planEndDate;
+	}
+	public void setPlanEndDate(LocalDate planEndDate) {
+		this.planEndDate = planEndDate;
+	}
 	@Override
 	public String toString() {
 	    return "CitizenPlan{" +

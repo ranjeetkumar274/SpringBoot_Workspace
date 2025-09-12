@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ashu.entities.CitizenPlanInfo;
+import com.ashu.request.SearchRequest;
 
 @Service
 public interface ReportService {
@@ -13,7 +14,7 @@ public interface ReportService {
 	
 	public List<String> getPlanStatus();
 	
-	public List<CitizenPlanInfo> search(CitizenPlanInfo citizenPlanInfo);
+	public List<CitizenPlanInfo> search(SearchRequest request);
 	
 	public boolean generateExcel();
 	

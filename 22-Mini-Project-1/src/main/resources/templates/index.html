@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Report Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container p-4" style="background-color: lightblue; min-height: 100vh;">
+    <h3 class="text-center mb-4">Report Application</h3>
+
+   
+    <form th:action="@{/search}" th:object="${search}" method="post">
+        <table class="table table-bordered bg-white">
+            <tr>
+                <td>Plan Name :</td>
+                <td>
+                    <select th:field="*{planName}" class="form-select">
+                        <option value="">--Select--</option>
+                        <!-- Dynamic options -->
+                        <option th:each="plan : ${planNames}" th:value="${plan}" th:text="${plan}"></option>
+                    </select>
+                </td>
+
+                <td>Plan Status :</td>
+                <td>
+                    <select th:field="*{planStatus}" class="form-select">
+                        <option value="">--Select--</option>
+                        <!-- Dynamic options -->
+                        <option th:each="status : ${planStatus}" th:value="${status}" th:text="${status}"></option>
+                    </select>
+                </td>
+
+                <td>Gender:</td>
+                <td>
+                    <select th:field="*{gender}" class="form-select">
+                        <option value="">--Select--</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Start Date:</td>
+                <td><input type="date" th:field="*{startDate}" class="form-control"/></td>
+                <td>End Date:</td>
+                <td><input type="date" th:field="*{endDate}" class="form-control"/></td>
+            </tr>
+
+            <tr>
+            
+            		<td colspan="2" class="text-center">
+                    <button type="button" th:onclick="|window.location='@{/}'|" class="btn btn-warning">Reset</button>
+            		</td>
+            
+                <td colspan="4" class="text-center">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </td>
+                
+                
+            </tr>
+        </table>
+    </form>
+
+    <hr/>
+    <div th:if="${plans != null}">
+    <table class="table table-bordered bg-white">
+        <thead>
+            <tr>
+                <th>Citizen Id</th>
+                <th>Citizen Name</th>
+                <th>Gender</th>
+                <th>Plan Name</th>
+                <th>Plan Status</th>
+                <th>Plan Start Date</th>
+                <th>Plan End Date</th>
+                <th>Benefit Amount</th>
+                <th>Denial Reason</th>
+                <th>Termination Date</th>
+                <th>Termination Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+    <tr th:if="${plans == null or #lists.isEmpty(plans)}">
+        <td colspan="11" class="text-center text-warning fw-bold">
+            ⚠️ No data to show
+        </td>
+    </tr>
+
+    <tr th:each="plan : ${plans}">
+        <td th:text="${plan.citizenId}"></td>
+        <td th:text="${plan.citizenName}"></td>
+        <td th:text="${plan.gender}"></td>
+        <td th:text="${plan.planName}"></td>
+        <td th:text="${plan.planStatus}"></td>
+        <td th:text="${plan.planStartDate}"></td>
+        <td th:text="${plan.planEndDate}"></td>
+        <td th:text="${plan.benefitAmount}"></td>
+        <td th:text="${plan.denialReason}"></td>
+        <td th:text="${plan.terminationDate}"></td>
+        <td th:text="${plan.terminationReason}"></td>
+    </tr>
+</tbody>
+
+    </table>
+</div>
+
+        
+        
+
+    <div class="text-center">
+        <a th:href="@{/excel}" class="btn btn-success me-2">Export Excel</a>
+        <a th:href="@{/pdf}" class="btn btn-danger">Export PDF</a>
+    </div>
+</div>
+</body>
+</html>

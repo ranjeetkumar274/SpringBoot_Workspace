@@ -2,12 +2,20 @@ package com.ashu.request;
 
 import java.time.LocalDate;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 public class SearchRequest {
 	
 	private String planName;
 	private String planStatus;
 	private String gender;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate endDate;
 	
 	
@@ -42,6 +50,15 @@ public class SearchRequest {
 		this.endDate = endDate;
 	}
 	
-	
+	@Override
+	public String toString() {
+	    return "SearchRequest{" +
+	            "planName='" + planName + '\'' +
+	            ", planStatus='" + planStatus + '\'' +
+	            ", gender='" + gender + '\'' +
+	            ", startDate=" + startDate +
+	            ", endDate=" + endDate +
+	            '}';
+	}
 	
 }
