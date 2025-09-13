@@ -3,7 +3,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/ranjeetkumar274/SpringWorkspace?color=blue&style=for-the-badge)
 ![GitHub stars](https://img.shields.io/github/stars/ranjeetkumar274/SpringWorkspace?style=for-the-badge&color=yellow)
 ![GitHub forks](https://img.shields.io/github/forks/ranjeetkumar274/SpringWorkspace?style=for-the-badge&color=green)
-![License](https://img.shields.io/github/license/ranjeetkumar274/SpringWorkspace?style=for-the-badge&color=red)
+![License](https://img.shields.io/github/license/ranjeetkumar274/SpringBoot_Workspace?style=for-the-badge&color=red)
 
 
 > 📚 A **complete Spring Boot learning repository** — from IoC & Dependency Injection basics to building **SpringBoot + Microservices**.  
