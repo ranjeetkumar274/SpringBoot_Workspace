@@ -68,11 +68,103 @@ Here’s the high-level Spring Boot application architecture:
 ---
 
 ## 🚀 Getting Started
-```bash
-# clone repo
-git clone https://github.com/ranjeetkumar274/SpringWorkspace.git
-cd SpringWorkspace
 
-# run a specific module
-cd 03-spring-boot-basics
+### Prerequisites
+- **Java 17+** installed
+- **Maven 3.6+** or **Gradle 7.0+** (some modules use Gradle)
+- **MySQL 8.0+** (for JPA examples)
+- **IDE** (IntelliJ IDEA, Eclipse, or VS Code)
+
+### Quick Start
+```bash
+# Clone the repository
+git clone https://github.com/ranjeetkumar274/SpringBoot_Workspace.git
+cd SpringBoot_Workspace
+
+# For Maven-based modules (most modules)
+cd 01-IOC-DI-App
+mvn clean compile exec:java
+
+# For Gradle-based modules (e.g., 02-SpringBoot-App)
+cd 02-SpringBoot-App
+./gradlew bootRun
+
+# For Spring Boot applications with Maven wrapper
+cd 13-WebMVC-thymleaf
 ./mvnw spring-boot:run
+```
+
+### Module Structure
+Each module is self-contained with its own:
+- `pom.xml` - Maven dependencies
+- `src/main/java` - Source code
+- `src/main/resources` - Configuration files
+- `README.md` (where applicable) - Module-specific instructions
+
+### Running Examples
+1. **IoC & DI Examples**: Start with `01-IOC-DI-App`
+2. **Spring Boot Basics**: Explore `02-SpringBoot-App`
+3. **Data JPA**: Try `05-SpringData-JPA-App` (requires MySQL setup)
+4. **Web MVC**: Run `10-SpringWebMVC-App-2`
+5. **REST APIs**: Test `19-SB-Rest-Api-1`
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these guidelines:
+
+### How to Contribute
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add some amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Contribution Guidelines
+- Follow existing code style and formatting
+- Add comments for complex logic
+- Update documentation for new features
+- Test your changes thoroughly
+- Include relevant notes in the `Notes/` directory
+
+### Areas for Contribution
+- 📝 Additional code examples
+- 🐛 Bug fixes and improvements
+- 📚 Documentation enhancements
+- 🧪 Test cases
+- 🎨 Excalidraw diagrams
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+### MIT License Summary
+- ✅ Commercial use
+- ✅ Modification
+- ✅ Distribution
+- ✅ Private use
+- ❌ Liability
+- ❌ Warranty
+
+---
+
+## 🙏 Acknowledgments
+
+- **Mr. Ashok** - Course Trainer ([AshokIT](https://ashokitech.com))
+- **Spring Framework Team** - For the amazing framework
+- **Community Contributors** - For valuable feedback and improvements
+
+---
+
+## 📞 Contact
+
+**Ranjeet Kumar**
+- GitHub: [@ranjeetkumar274](https://github.com/ranjeetkumar274)
+- Course Content: [AshokIT Spring Boot Course](https://ashokitech.com/spring-boot-microservices-online-training)
+
+---
+
+⭐ **Star this repository if it helped you!** ⭐
