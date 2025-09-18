@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: 29-SB-MicroServices-API-Gateway
+
+  cloud:
+    gateway:
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true
+      routes:
+        - id: welcome-api
+          uri: lb://26-SB-MICROSERVICES-WELCOME-API
+          predicates:
+            - Path=/welcome/**
+        - id: greet-api
+          uri: lb://26-SB-MICROSERVICES-BACKEND-API
+          predicates:
+            - Path=/greet/**
+
+server:
+  port: 3333
