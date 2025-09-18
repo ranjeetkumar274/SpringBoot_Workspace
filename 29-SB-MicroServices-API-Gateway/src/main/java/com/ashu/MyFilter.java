@@ -13,6 +13,7 @@ public class MyFilter implements GlobalFilter{
 		for(String s : exchange.getRequest().getHeaders().keySet()) {
 			System.out.println(s+" : "+exchange.getRequest().getHeaders().get(s));
 		}
+		
 		return chain.filter(exchange);
 }
 }
