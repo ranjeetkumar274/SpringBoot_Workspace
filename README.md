@@ -11,6 +11,20 @@
 
 ---
 
+## 🏗 Architecture of a Microservices Enviourment Setup
+Here’s the high-level Microservices application architecture:
+
+![Spring Boot Architecture](microservices-architecture.svg)
+
+---
+
+## 🏗 Architecture of a Standard SpringBoot Project
+Here’s the high-level Spring Boot application architecture:
+
+![Spring Boot Architecture](./Untitled-2025-08-19-1219.excalidraw.svg)
+
+---
+
 ## 📖 Table of Contents + Notes  
 
 | **Table of Contents** | **Notes** |
@@ -45,13 +59,6 @@ Each module folder contains:
 | **05 - Spring Data JPA** | Entities, Repositories, Queries |
 | **06 - Security** | Authentication, Authorization |
 | **07 - Microservices** | Service Discovery, API Gateway |
-
----
-
-## 🏗 Architecture
-Here’s the high-level Spring Boot application architecture:
-
-![Spring Boot Architecture](./Untitled-2025-08-19-1219.excalidraw.svg)
 
 ---
 
