@@ -14,7 +14,7 @@
 ## 🏗 Architecture of a Microservices Enviourment Setup
 Here’s the high-level Microservices application architecture:
 
-![Spring Boot Architecture](microservices-architecture1.svg)
+![Spring Boot Architecture](microservices-architecture2.svg)
 
 ---
 
