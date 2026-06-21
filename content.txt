@@ -39,7 +39,6 @@
     overflow-x: hidden;
   }
 
-  /* ─── SCROLLBAR ─── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 3px; }
@@ -64,7 +63,7 @@
   .logo span { color: var(--muted); }
 
   .header-stats {
-    display: flex; gap: 1.5rem; align-items: center;
+    display: flex; gap: 0.8rem; align-items: center;
   }
 
   .stat-pill {
@@ -76,6 +75,19 @@
     background: var(--surface);
   }
   .stat-pill .num { color: var(--accent2); font-weight: 600; }
+
+  .icon-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 20px;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.15s;
+  }
+  .icon-btn:hover { border-color: var(--accent); color: var(--accent2); }
 
   /* ─── HERO ─── */
   .hero {
@@ -196,7 +208,6 @@
     gap: 1.2rem;
   }
 
-  /* ─── PHASE DIVIDER ─── */
   .phase-divider {
     display: flex; align-items: center; gap: 1rem;
     margin: 1.2rem 0 0.3rem;
@@ -216,7 +227,6 @@
   .phase-3 .phase-label { background: rgba(251,191,36,0.1); color: var(--yellow); border: 1px solid rgba(251,191,36,0.2); }
   .phase-4 .phase-label { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
 
-  /* ─── SECTION CARD ─── */
   .section-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -306,27 +316,22 @@
   }
   .open .chevron { transform: rotate(180deg); }
 
-  /* ─── SECTION BODY ─── */
   .section-body {
     display: none;
     border-top: 1px solid var(--border);
   }
   .section-body.visible { display: block; }
 
-  /* ─── THEORY BLOCK ─── */
   .theory-block {
     padding: 0.9rem 1.2rem;
     background: rgba(124,106,247,0.05);
     border-bottom: 1px solid var(--border);
     display: flex; align-items: flex-start; gap: 0.8rem;
   }
-  .theory-icon {
-    font-size: 0.8rem; flex-shrink: 0; margin-top: 2px;
-  }
+  .theory-icon { font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
   .theory-text { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
   .theory-text strong { color: var(--accent2); font-weight: 500; }
 
-  /* ─── SUBTOPICS ─── */
   .subtopic-group {
     padding: 0.9rem 1.2rem;
     border-bottom: 1px solid var(--border);
@@ -352,7 +357,6 @@
     gap: 0.45rem;
   }
 
-  /* ─── PROBLEM CHIP ─── */
   .problem-chip {
     display: flex; align-items: center; gap: 0.55rem;
     padding: 7px 10px;
@@ -367,6 +371,13 @@
   .problem-chip:hover { border-color: var(--muted2); background: rgba(255,255,255,0.03); }
   .problem-chip.done { border-color: rgba(34,211,164,0.25); background: rgba(34,211,164,0.04); }
   .problem-chip.done .prob-name { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--muted2); }
+  .problem-chip.has-notes::after {
+    content: '✎';
+    position: absolute;
+    top: 2px; right: 4px;
+    font-size: 0.55rem;
+    color: var(--accent2);
+  }
 
   .check-circle {
     width: 16px; height: 16px;
@@ -377,7 +388,9 @@
     transition: all 0.15s;
     font-size: 0.55rem;
     color: transparent;
+    cursor: pointer;
   }
+  .check-circle:hover { border-color: var(--green); }
   .problem-chip.done .check-circle {
     background: var(--green);
     border-color: var(--green);
@@ -400,7 +413,6 @@
   .diff-medium { background: var(--yellow); }
   .diff-hard { background: var(--red); }
 
-  /* ─── TIP BLOCK ─── */
   .tip-block {
     padding: 0.8rem 1.2rem;
     background: rgba(251,191,36,0.04);
@@ -411,7 +423,6 @@
   .tip-text { font-size: 0.78rem; color: var(--muted); line-height: 1.55; font-family: 'Inter', sans-serif; }
   .tip-text strong { color: var(--yellow); font-weight: 500; }
 
-  /* ─── NO RESULTS ─── */
   .no-results {
     text-align: center; padding: 4rem 2rem;
     color: var(--muted);
@@ -420,7 +431,6 @@
   }
   .no-results.visible { display: block; }
 
-  /* ─── KEYBOARD HINT ─── */
   kbd {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
@@ -431,9 +441,176 @@
     color: var(--muted);
   }
 
-  /* ─── RESPONSIVE ─── */
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.visible { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    max-width: 640px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--accent-glow);
+  }
+
+  .modal-header {
+    padding: 1.2rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 1rem;
+  }
+  .modal-title-wrap { flex: 1; min-width: 0; }
+  .modal-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .modal-subtitle {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 4px;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .modal-close {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .modal-close:hover { color: var(--red); border-color: var(--red); }
+
+  .modal-section {
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-section:last-child { border-bottom: none; }
+  .modal-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+  .modal-desc {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+  }
+
+  .modal-testcase {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+    line-height: 1.5;
+  }
+  .modal-testcase .tc-label {
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  .resource-links {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+  }
+  .resource-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  .resource-link:hover { transform: translateY(-1px); }
+  .resource-link.lc { border-color: rgba(251,146,60,0.3); color: var(--orange); }
+  .resource-link.lc:hover { background: rgba(251,146,60,0.08); }
+  .resource-link.gfg { border-color: rgba(34,211,164,0.3); color: var(--green); }
+  .resource-link.gfg:hover { background: rgba(34,211,164,0.08); }
+  .resource-link.yt { border-color: rgba(248,113,113,0.3); color: var(--red); }
+  .resource-link.yt:hover { background: rgba(248,113,113,0.08); }
+
+  .notes-textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .notes-textarea:focus { border-color: var(--accent); }
+  .notes-textarea::placeholder { color: var(--muted2); }
+
+  .modal-actions {
+    padding: 1rem 1.4rem;
+    display: flex; gap: 0.6rem;
+    justify-content: flex-end;
+    background: var(--surface2);
+  }
+  .btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn:hover { border-color: var(--muted2); }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+  .btn-done {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--bg);
+  }
+
   @media (max-width: 600px) {
-    .header-stats { display: none; }
+    .header-stats .stat-pill { display: none; }
     .hero { padding: 2.5rem 1.2rem 2rem; }
     .progress-wrap, .filters, .roadmap { padding-left: 1.2rem; padding-right: 1.2rem; }
     .problems-grid { grid-template-columns: 1fr; }
@@ -444,6 +621,91 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; }
   }
+
+  .icon-btn {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--muted); border-radius: 20px; font-size: 0.8rem;
+  padding: 4px 10px; cursor: pointer; transition: all 0.15s;
+}
+.icon-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px); z-index: 1000; display: none;
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-overlay.visible { display: flex; }
+.modal {
+  background: var(--surface); border: 1px solid var(--accent);
+  border-radius: 14px; max-width: 640px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--accent-glow);
+}
+.modal-header {
+  padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; gap: 1rem;
+}
+.modal-title { font-size: 1.15rem; font-weight: 600; line-height: 1.3; }
+.modal-subtitle {
+  font-size: 0.72rem; color: var(--muted);
+  font-family: 'JetBrains Mono', monospace; margin-top: 4px;
+}
+.modal-close {
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--muted); width: 28px; height: 28px;
+  border-radius: 6px; cursor: pointer; font-size: 1rem;
+}
+.modal-close:hover { color: var(--red); border-color: var(--red); }
+.modal-section { padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); }
+.modal-section:last-child { border-bottom: none; }
+.modal-section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 0.6rem;
+}
+.modal-desc { font-size: 0.88rem; line-height: 1.6; font-family: 'Inter', sans-serif; }
+.modal-tc {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 6px; padding: 0.6rem 0.8rem;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+  margin-bottom: 0.5rem; white-space: pre-wrap; line-height: 1.5;
+}
+.modal-tc b { color: var(--accent2); }
+.resource-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.resource-link {
+  padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); text-decoration: none;
+  font-size: 0.8rem; font-weight: 500; transition: all 0.15s;
+}
+.resource-link.lc { border-color: rgba(251,146,60,0.3); color: var(--orange); }
+.resource-link.gfg { border-color: rgba(34,211,164,0.3); color: var(--green); }
+.resource-link.yt { border-color: rgba(248,113,113,0.3); color: var(--red); }
+.resource-link:hover { transform: translateY(-1px); background: rgba(255,255,255,0.03); }
+.notes-textarea {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.7rem; color: var(--text);
+  font-family: 'Inter', sans-serif; font-size: 0.85rem;
+  min-height: 80px; outline: none; resize: vertical;
+}
+.notes-textarea:focus { border-color: var(--accent); }
+.modal-actions {
+  padding: 1rem 1.4rem; display: flex; gap: 0.6rem;
+  justify-content: flex-end; background: var(--surface2);
+}
+.btn {
+  padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text);
+  font-size: 0.82rem; font-weight: 500; cursor: pointer;
+}
+.btn-primary { background: var(--accent); border-color: var(--accent); color: white; }
+.btn-primary:hover { background: var(--accent2); }
+.problem-chip.has-notes::after {
+  content: '✎'; position: absolute; top: 2px; right: 4px;
+  font-size: 0.55rem; color: var(--accent2);
+}
+
+
 </style>
 </head>
 <body>
@@ -453,13 +715,16 @@
   <div class="header-stats">
     <div class="stat-pill"><span class="num" id="h-done">0</span> / <span id="h-total">0</span> solved</div>
     <div class="stat-pill"><span class="num" id="h-pct">0%</span> complete</div>
+    <button class="icon-btn" id="btn-export" title="Backup progress">⬇</button>
+    <button class="icon-btn" id="btn-import" title="Restore progress">⬆</button>
+    <input type="file" id="import-file" accept="application/json" style="display:none">
   </div>
 </header>
 
 <div class="hero">
   <div class="eyebrow">Complete DSA Roadmap</div>
   <h1>Master Data Structures<br>& <em>Algorithms</em></h1>
-  <p class="hero-desc">Track every concept from fundamentals to advanced topics. Click problems to mark them done — progress is saved automatically.</p>
+  <p class="hero-desc">Track every concept from fundamentals to advanced topics. Click a problem to open its description, test cases &amp; resource links. Click the circle to mark it done — progress is saved automatically and you can export a backup anytime.</p>
 </div>
 
 <div class="progress-wrap">
@@ -484,9 +749,79 @@
 <div class="roadmap" id="roadmap"></div>
 <div class="no-results" id="no-results">No problems match your filter. Try adjusting your search.</div>
 
-<script>
+<!-- ─── MODAL ─── -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <div class="modal-title" id="m-title">Problem</div>
+        <div class="modal-subtitle" id="m-subtitle"></div>
+      </div>
+      <button class="modal-close" id="m-close">✕</button>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-label">📖 Description</div>
+      <div class="modal-desc" id="m-desc"></div>
+    </div>
+
+    <div class="modal-section" id="m-tc-section">
+      <div class="modal-section-label">🧪 Sample Test Cases</div>
+      <div id="m-testcases"></div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-label">🔗 Practice Resources</div>
+      <div class="resource-links" id="m-resources"></div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-label">📝 Your Notes <span style="color:var(--muted2)">(saved automatically)</span></div>
+      <textarea class="notes-textarea" id="m-notes" placeholder="Write your approach, complexity analysis, edge cases, or anything you want to remember…"></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" id="m-cancel">Close</button>
+      <button class="btn btn-primary" id="m-toggle-done">Mark as Done ✓</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div style="flex:1;min-width:0;">
+        <div class="modal-title" id="m-title">Problem</div>
+        <div class="modal-subtitle" id="m-subtitle"></div>
+      </div>
+      <button class="modal-close" id="m-close">✕</button>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">📖 Description</div>
+      <div class="modal-desc" id="m-desc"></div>
+    </div>
+    <div class="modal-section" id="m-tc-section">
+      <div class="modal-section-label">🧪 Sample Test Cases</div>
+      <div id="m-testcases"></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">🔗 Practice Resources</div>
+      <div class="resource-links" id="m-resources"></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">📝 Your Notes <span style="color:var(--muted2)">(auto-saved)</span></div>
+      <textarea class="notes-textarea" id="m-notes" placeholder="Approach, complexity, edge cases..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="m-cancel">Close</button>
+      <button class="btn btn-primary" id="m-toggle-done">Mark as Done ✓</button>
+    </div>
+  </div>
+</div>
+
+<script></script>
 // ─────────────────────────────────────────────
-// DATA
+// DATA (your full roadmap — unchanged)
 // ─────────────────────────────────────────────
 const ROADMAP = [
   {
@@ -1136,266 +1471,331 @@ const ROADMAP = [
 ];
 
 // ─────────────────────────────────────────────
-// STATE
+// PROBLEM DETAILS — curated descriptions + test cases
+// Any problem not listed gets a generic, helpful template.
+// Add as many as you like, key = exact problem name.
 // ─────────────────────────────────────────────
-let done = JSON.parse(localStorage.getItem('dsa_done') || '{}');
-let currentFilter = 'all';
-let searchQuery = '';
-
-// ─────────────────────────────────────────────
-// HELPERS
-// ─────────────────────────────────────────────
-function problemId(sectionId, groupLabel, name) {
-  return `${sectionId}::${groupLabel}::${name}`;
-}
-
-function diffFromGroup(diff) {
-  if (diff === 'easy') return 'easy';
-  if (diff === 'medium') return 'medium';
-  return 'hard';
-}
-
-function allProblems() {
-  const probs = [];
-  for (const phase of ROADMAP) {
-    for (const sec of phase.sections) {
-      for (const grp of sec.groups) {
-        for (const p of grp.problems) {
-          probs.push({ id: problemId(sec.id, grp.label, p), diff: grp.diff, name: p, sectionId: sec.id });
-        }
-      }
-    }
+const PROBLEM_DETAILS = {
+  "2 Sum": {
+    desc: "Given an array of integers and a target value, return indices of the two numbers such that they add up to the target. You may assume each input has exactly one solution.",
+    tests: [
+      { in: "nums = [2,7,11,15], target = 9", out: "[0,1]" },
+      { in: "nums = [3,2,4], target = 6", out: "[1,2]" },
+      { in: "nums = [3,3], target = 6", out: "[0,1]" }
+    ]
+  },
+  "Reverse Array": {
+    desc: "Reverse the given array in-place. Do it without using extra space (O(1) auxiliary memory).",
+    tests: [
+      { in: "[1,2,3,4,5]", out: "[5,4,3,2,1]" },
+      { in: "[10]", out: "[10]" }
+    ]
+  },
+  "Kadane's Algorithm": {
+    desc: "Find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.",
+    tests: [
+      { in: "[-2,1,-3,4,-1,2,1,-5,4]", out: "6 (subarray [4,-1,2,1])" },
+      { in: "[1]", out: "1" },
+      { in: "[5,4,-1,7,8]", out: "23" }
+    ]
+  },
+  "Merge Intervals": {
+    desc: "Given a collection of intervals, merge all overlapping intervals and return the resulting list.",
+    tests: [
+      { in: "[[1,3],[2,6],[8,10],[15,18]]", out: "[[1,6],[8,10],[15,18]]" },
+      { in: "[[1,4],[4,5]]", out: "[[1,5]]" }
+    ]
+  },
+  "Next Permutation": {
+    desc: "Rearrange numbers into the lexicographically next greater permutation. If not possible, rearrange to the lowest (sorted ascending). Must be in-place with constant extra memory.",
+    tests: [
+      { in: "[1,2,3]", out: "[1,3,2]" },
+      { in: "[3,2,1]", out: "[1,2,3]" }
+    ]
+  },
+  "Palindrome Check": {
+    desc: "Given a string, determine if it reads the same forward and backward. Consider only alphanumeric characters and ignore case if specified.",
+    tests: [
+      { in: '"racecar"', out: "true" },
+      { in: '"hello"', out: "false" }
+    ]
+  },
+  "Group Anagrams": {
+    desc: "Given an array of strings, group the anagrams together. You can return the answer in any order.",
+    tests: [
+      { in: '["eat","tea","tan","ate","nat","bat"]', out: '[["bat"],["nat","tan"],["ate","eat","tea"]]' }
+    ]
+  },
+  "Longest Consecutive Sequence": {
+    desc: "Given an unsorted array of integers, find the length of the longest consecutive elements sequence. Must run in O(n).",
+    tests: [
+      { in: "[100,4,200,1,3,2]", out: "4 (sequence: 1,2,3,4)" }
+    ]
+  },
+  "Reverse Singly Linked List": {
+    desc: "Given the head of a singly linked list, reverse the list and return the reversed list.",
+    tests: [
+      { in: "1 -> 2 -> 3 -> 4 -> 5", out: "5 -> 4 -> 3 -> 2 -> 1" }
+    ]
+  },
+  "Detect Cycle (Floyd's)": {
+    desc: "Determine if a linked list has a cycle using Floyd's Tortoise & Hare algorithm (O(1) space).",
+    tests: [
+      { in: "1->2->3->4->2(cycle)", out: "true" },
+      { in: "1->2->3", out: "false" }
+    ]
+  },
+  "LRU Cache (HashMap + DLL)": {
+    desc: "Design a Least Recently Used (LRU) cache supporting get(key) and put(key, value) in O(1). When capacity is exceeded, evict the least recently used item.",
+    tests: [
+      { in: "capacity=2; put(1,1); put(2,2); get(1); put(3,3); get(2)", out: "1, -1" }
+    ]
+  },
+  "Check Balanced Brackets": {
+    desc: "Given a string containing only '()[]{}', determine if the brackets are properly closed and nested.",
+    tests: [
+      { in: '"()[]{}"', out: "true" },
+      { in: '"(]"', out: "false" }
+    ]
+  },
+  "Largest Rectangle in Histogram": {
+    desc: "Given an array of bar heights, find the area of the largest rectangle in the histogram. Solve in O(n) using a monotonic stack.",
+    tests: [
+      { in: "[2,1,5,6,2,3]", out: "10" },
+      { in: "[2,4]", out: "4" }
+    ]
+  },
+  "Trapping Rain Water": {
+    desc: "Given n non-negative integers representing an elevation map, compute how much water it can trap after raining.",
+    tests: [
+      { in: "[0,1,0,2,1,0,1,3,2,1,2,1]", out: "6" }
+    ]
+  },
+  "Sliding Window Maximum": {
+    desc: "Given an array and window size k, return the maximum in each sliding window of size k. Solve in O(n) using a monotonic deque.",
+    tests: [
+      { in: "[1,3,-1,-3,5,3,6,7], k=3", out: "[3,3,5,5,6,7]" }
+    ]
+  },
+  "Binary Search": {
+    desc: "Search for a target in a sorted array. Return its index or -1 if not present. Must be O(log n).",
+    tests: [
+      { in: "[-1,0,3,5,9,12], target=9", out: "4" },
+      { in: "[-1,0,3,5,9,12], target=2", out: "-1" }
+    ]
+  },
+  "Koko Eating Bananas": {
+    desc: "Koko has piles of bananas and h hours to eat. Find the minimum integer eating speed k (bananas/hour) such that she finishes all piles within h hours. Classic 'Search on Answer'.",
+    tests: [
+      { in: "piles=[3,6,7,11], h=8", out: "4" },
+      { in: "piles=[30,11,23,4,20], h=5", out: "30" }
+    ]
+  },
+  "Median of Two Sorted Arrays": {
+    desc: "Given two sorted arrays, return the median of the merged array. The overall run time complexity should be O(log(min(m,n))).",
+    tests: [
+      { in: "nums1=[1,3], nums2=[2]", out: "2.0" },
+      { in: "nums1=[1,2], nums2=[3,4]", out: "2.5" }
+    ]
+  },
+  "Quick Sort": {
+    desc: "Implement Quick Sort using divide-and-conquer with a pivot. Average O(n log n), worst O(n²).",
+    tests: [
+      { in: "[10,7,8,9,1,5]", out: "[1,5,7,8,9,10]" }
+    ]
+  },
+  "Merge Sort": {
+    desc: "Implement Merge Sort: divide the array in half, recursively sort each half, then merge. Stable, O(n log n) guaranteed.",
+    tests: [
+      { in: "[38,27,43,3,9,82,10]", out: "[3,9,10,27,38,43,82]" }
+    ]
+  },
+  "Inversion Count": {
+    desc: "Count pairs (i, j) such that i < j and arr[i] > arr[j]. Use modified merge sort for O(n log n).",
+    tests: [
+      { in: "[2,4,1,3,5]", out: "3" },
+      { in: "[5,4,3,2,1]", out: "10" }
+    ]
+  },
+  "3 Sum (All Unique Triplets)": {
+    desc: "Given an integer array, return all unique triplets [a,b,c] such that a+b+c = 0. The solution set must not contain duplicate triplets.",
+    tests: [
+      { in: "[-1,0,1,2,-1,-4]", out: "[[-1,-1,2],[-1,0,1]]" }
+    ]
+  },
+  "Container with Most Water": {
+    desc: "Given n non-negative integers representing heights of vertical lines, find two lines forming a container that holds the most water.",
+    tests: [
+      { in: "[1,8,6,2,5,4,8,3,7]", out: "49" }
+    ]
+  },
+  "Longest Substring with All Distinct": {
+    desc: "Given a string, find the length of the longest substring without repeating characters.",
+    tests: [
+      { in: '"abcabcbb"', out: "3 (abc)" },
+      { in: '"bbbbb"', out: "1" }
+    ]
+  },
+  "Minimum Window Substring": {
+    desc: "Given strings s and t, return the minimum window substring of s such that every character in t (including duplicates) is included.",
+    tests: [
+      { in: 's="ADOBECODEBANC", t="ABC"', out: '"BANC"' }
+    ]
+  },
+  "Subarrays with Sum K": {
+    desc: "Given an array of integers and an integer k, return the total number of contiguous subarrays whose sum equals k.",
+    tests: [
+      { in: "nums=[1,1,1], k=2", out: "2" }
+    ]
+  },
+  "Power of Two": {
+    desc: "Given an integer n, return true if it is a power of two (2^k for some k ≥ 0). Solve using bit manipulation in O(1).",
+    tests: [
+      { in: "1", out: "true" },
+      { in: "16", out: "true" },
+      { in: "3", out: "false" }
+    ]
+  },
+  "Find Missing Number (XOR)": {
+    desc: "Given an array containing n distinct numbers in [0,n], find the one missing from the array. Use XOR for O(n) time, O(1) space.",
+    tests: [
+      { in: "[3,0,1]", out: "2" },
+      { in: "[0,1]", out: "2" }
+    ]
+  },
+  "Height/Depth of Tree": {
+    desc: "Given the root of a binary tree, return its maximum depth (number of nodes along the longest path from root to leaf).",
+    tests: [
+      { in: "[3,9,20,null,null,15,7]", out: "3" }
+    ]
+  },
+  "Diameter of Tree": {
+    desc: "Return the length of the longest path between any two nodes in a binary tree. The path may or may not pass through the root.",
+    tests: [
+      { in: "[1,2,3,4,5]", out: "3" }
+    ]
+  },
+  "Lowest Common Ancestor": {
+    desc: "Given a binary tree and two nodes p and q, return their lowest common ancestor (deepest node that has both as descendants).",
+    tests: [
+      { in: "tree=[3,5,1,6,2,0,8,null,null,7,4], p=5, q=1", out: "3" }
+    ]
+  },
+  "Validate BST": {
+    desc: "Given the root of a binary tree, determine if it is a valid Binary Search Tree. Use min/max bounds to check the global property.",
+    tests: [
+      { in: "[2,1,3]", out: "true" },
+      { in: "[5,1,4,null,null,3,6]", out: "false" }
+    ]
+  },
+  "Kth Largest Element": {
+    desc: "Find the kth largest element in an unsorted array. Use a min-heap of size k for O(n log k).",
+    tests: [
+      { in: "[3,2,1,5,6,4], k=2", out: "5" }
+    ]
+  },
+  "Median in a Stream": {
+    desc: "Design a data structure that supports adding numbers from a stream and finding the median at any time. Use two heaps (max + min).",
+    tests: [
+      { in: "addNum(1), addNum(2), findMedian()", out: "1.5" }
+    ]
+  },
+  "Dijkstra's Algorithm": {
+    desc: "Given a weighted graph with non-negative edges, find the shortest path from a source to all other nodes. Use a min-heap for O((V+E) log V).",
+    tests: [
+      { in: "edges=[[0,1,4],[0,2,1],[2,1,2],[1,3,1],[2,3,5]], src=0", out: "[0,3,1,4]" }
+    ]
+  },
+  "Topological Sort (Kahn's + DFS)": {
+    desc: "Given a DAG, return any valid topological ordering of nodes (every directed edge u→v means u appears before v).",
+    tests: [
+      { in: "edges=[[0,1],[0,2],[1,3],[2,3]]", out: "[0,1,2,3] or [0,2,1,3]" }
+    ]
+  },
+  "Course Schedule II": {
+    desc: "Given numCourses and prerequisites, return any valid order of courses you should take. If impossible, return empty array.",
+    tests: [
+      { in: "n=2, prereq=[[1,0]]", out: "[0,1]" }
+    ]
+  },
+  "N-Queens Problem": {
+    desc: "Place n queens on an n×n chessboard so that no two queens attack each other. Return all distinct solutions.",
+    tests: [
+      { in: "n=4", out: '[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]' }
+    ]
+  },
+  "Sudoku Solver": {
+    desc: "Write a program to solve a 9×9 Sudoku puzzle by filling empty cells. The solution must satisfy all Sudoku rules.",
+    tests: [
+      { in: "9x9 board with '.'", out: "filled valid board" }
+    ]
+  },
+  "Climbing Stairs": {
+    desc: "You are climbing a staircase with n steps. Each time you can climb 1 or 2 steps. How many distinct ways are there to reach the top?",
+    tests: [
+      { in: "n=2", out: "2" },
+      { in: "n=3", out: "3" }
+    ]
+  },
+  "House Robber": {
+    desc: "Given non-negative integers representing money in each house, return the maximum amount you can rob without robbing two adjacent houses.",
+    tests: [
+      { in: "[1,2,3,1]", out: "4" },
+      { in: "[2,7,9,3,1]", out: "12" }
+    ]
+  },
+  "Coin Change (Min Coins)": {
+    desc: "Given coins of different denominations and a total amount, return the fewest number of coins needed. Return -1 if impossible.",
+    tests: [
+      { in: "coins=[1,2,5], amount=11", out: "3 (5+5+1)" }
+    ]
+  },
+  "Longest Common Subsequence": {
+    desc: "Given two strings, return the length of their longest common subsequence (not necessarily contiguous).",
+    tests: [
+      { in: 'text1="abcde", text2="ace"', out: "3" }
+    ]
+  },
+  "Edit Distance": {
+    desc: "Given two strings, find the minimum number of operations (insert, delete, replace) to convert one to the other.",
+    tests: [
+      { in: 'word1="horse", word2="ros"', out: "3" }
+    ]
+  },
+  "0/1 Knapsack": {
+    desc: "Given weights and values of n items, and a knapsack of capacity W, maximize the value you can carry. Each item used at most once.",
+    tests: [
+      { in: "W=50, wt=[10,20,30], val=[60,100,120]", out: "220" }
+    ]
+  },
+  "Longest Increasing Subsequence": {
+    desc: "Given an integer array, return the length of the longest strictly increasing subsequence. Solve in O(n log n) using patience sort.",
+    tests: [
+      { in: "[10,9,2,5,3,7,101,18]", out: "4" }
+    ]
+  },
+  "Implement Trie (Insert, Search, StartsWith)": {
+    desc: "Implement a trie supporting insert(word), search(word) (exact match), and startsWith(prefix). All operations should be O(length).",
+    tests: [
+      { in: "insert('apple'), search('apple'), search('app'), startsWith('app')", out: "true, false, true" }
+    ]
+  },
+  "Maximum XOR of Two Numbers": {
+    desc: "Given an integer array, find the maximum XOR of two numbers in the array. Use a Bit-Trie for O(n × 32).",
+    tests: [
+      { in: "[3,10,5,25,2,8]", out: "28 (5 XOR 25)" }
+    ]
+  },
+  "KMP Algorithm": {
+    desc: "Implement the Knuth-Morris-Pratt pattern-matching algorithm. Pre-compute the LPS array for O(n+m) substring search.",
+    tests: [
+      { in: 'text="ababcabcabababd", pattern="ababd"', out: "index 10" }
+    ]
+  },
+  "Sieve of Eratosthenes": {
+    desc: "Find all prime numbers ≤ n in O(n log log n) time. Mark non-primes by iterating multiples of each found prime.",
+    tests: [
+      { in: "n=30", out: "[2,3,5,7,11,13,17,19,23,29]" }
+    ]
   }
-  return probs;
-}
-
-function updateGlobalProgress() {
-  const all = allProblems();
-  const total = all.length;
-  const doneCount = all.filter(p => done[p.id]).length;
-  const pct = total ? Math.round((doneCount / total) * 100) : 0;
-  document.getElementById('bar-fill').style.width = pct + '%';
-  document.getElementById('pct-label').textContent = pct + '%';
-  document.getElementById('h-done').textContent = doneCount;
-  document.getElementById('h-total').textContent = total;
-  document.getElementById('h-pct').textContent = pct + '%';
-}
-
-function saveDone() {
-  localStorage.setItem('dsa_done', JSON.stringify(done));
-}
-
-// ─────────────────────────────────────────────
-// RENDER
-// ─────────────────────────────────────────────
-function render() {
-  const container = document.getElementById('roadmap');
-  container.innerHTML = '';
-  let anyVisible = false;
-  let lastPhase = -1;
-
-  for (const phase of ROADMAP) {
-    if (phase.phase !== lastPhase) {
-      lastPhase = phase.phase;
-      const div = document.createElement('div');
-      div.className = `phase-divider phase-${phase.phase}`;
-      div.innerHTML = `<div class="phase-label">${phase.phaseName}</div><div class="phase-line"></div>`;
-      container.appendChild(div);
-    }
-
-    for (const sec of phase.sections) {
-      const card = renderSection(sec);
-      if (card) { container.appendChild(card); anyVisible = true; }
-    }
-  }
-
-  const noRes = document.getElementById('no-results');
-  noRes.classList.toggle('visible', !anyVisible);
-  updateGlobalProgress();
-  updateRings();
-}
-
-function renderSection(sec) {
-  // Collect all problems for this section
-  const allProbs = [];
-  for (const grp of sec.groups) {
-    for (const p of grp.problems) {
-      allProbs.push({ id: problemId(sec.id, grp.label, p), diff: grp.diff, name: p, group: grp.label });
-    }
-  }
-
-  // Filter
-  let visibleProbs = allProbs;
-  if (searchQuery) {
-    visibleProbs = allProbs.filter(p => p.name.toLowerCase().includes(searchQuery));
-  }
-  if (currentFilter === 'done') visibleProbs = visibleProbs.filter(p => done[p.id]);
-  if (currentFilter === 'unsolved') visibleProbs = visibleProbs.filter(p => !done[p.id]);
-  if (currentFilter === 'easy') visibleProbs = visibleProbs.filter(p => p.diff === 'easy');
-  if (currentFilter === 'medium') visibleProbs = visibleProbs.filter(p => p.diff === 'medium');
-  if (currentFilter === 'hard') visibleProbs = visibleProbs.filter(p => p.diff === 'hard');
-
-  if (searchQuery && visibleProbs.length === 0) return null;
-
-  const doneCount = allProbs.filter(p => done[p.id]).length;
-  const easyCount = allProbs.filter(p => p.diff === 'easy').length;
-  const medCount = allProbs.filter(p => p.diff === 'medium').length;
-  const hardCount = allProbs.filter(p => p.diff === 'hard').length;
-
-  const card = document.createElement('div');
-  card.className = 'section-card';
-  card.dataset.id = sec.id;
-
-  // Build groups for body (filtered)
-  const filteredGroups = sec.groups.map(grp => {
-    const probs = (searchQuery || ['done','unsolved','easy','medium','hard'].includes(currentFilter))
-      ? grp.problems.filter(p => visibleProbs.some(vp => vp.name === p && vp.group === grp.label))
-      : grp.problems;
-    return { ...grp, filteredProblems: probs };
-  }).filter(g => g.filteredProblems.length > 0);
-
-  const circumference = 2 * Math.PI * 13;
-  const offset = circumference - (doneCount / allProbs.length) * circumference;
-
-  card.innerHTML = `
-    <div class="section-header" role="button" tabindex="0" aria-expanded="false">
-      <div class="section-icon" style="background: ${sec.color}18; color: ${sec.color};">${sec.icon}</div>
-      <div class="section-title-wrap">
-        <div class="section-title">${sec.title}</div>
-        <div class="section-meta">${sec.meta}</div>
-      </div>
-      <div class="section-badges">
-        ${easyCount ? `<div class="badge badge-easy">${easyCount}E</div>` : ''}
-        ${medCount ? `<div class="badge badge-medium">${medCount}M</div>` : ''}
-        ${hardCount ? `<div class="badge badge-hard">${hardCount}H</div>` : ''}
-        <div class="badge badge-count">${allProbs.length} total</div>
-      </div>
-      <div class="section-progress-ring" data-section="${sec.id}" data-total="${allProbs.length}" data-done="${doneCount}">
-        <svg class="ring-svg" width="34" height="34" viewBox="0 0 34 34">
-          <circle class="ring-bg" cx="17" cy="17" r="13" />
-          <circle class="ring-fill" cx="17" cy="17" r="13"
-            stroke="${sec.color}"
-            stroke-dasharray="${circumference}"
-            stroke-dashoffset="${offset}" />
-        </svg>
-        <div class="ring-text">${doneCount}/${allProbs.length}</div>
-      </div>
-      <div class="chevron">▼</div>
-    </div>
-    <div class="section-body">
-      ${sec.theory ? `<div class="theory-block"><span class="theory-icon">📖</span><div class="theory-text"><strong>Theory:</strong> ${sec.theory}</div></div>` : ''}
-      ${renderGroups(filteredGroups, sec)}
-      ${sec.tip ? `<div class="tip-block"><span class="tip-icon">💡</span><div class="tip-text">${sec.tip}</div></div>` : ''}
-    </div>
-  `;
-
-  const header = card.querySelector('.section-header');
-  const body = card.querySelector('.section-body');
-
-  header.addEventListener('click', () => toggleSection(card, header, body));
-  header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSection(card, header, body); }});
-
-  // Auto-open if search or filter is active
-  if (searchQuery || currentFilter !== 'all') {
-    card.classList.add('open');
-    body.classList.add('visible');
-    header.setAttribute('aria-expanded', 'true');
-  }
-
-  return card;
-}
-
-function renderGroups(groups, sec) {
-  return groups.map(grp => `
-    <div class="subtopic-group">
-      <div class="subtopic-group-label">${grp.label}</div>
-      <div class="problems-grid">
-        ${grp.filteredProblems.map(p => {
-          const id = problemId(sec.id, grp.label, p);
-          const isDone = !!done[id];
-          return `
-            <div class="problem-chip ${isDone ? 'done' : ''}" data-prob-id="${id}" data-diff="${grp.diff}">
-              <div class="check-circle">${isDone ? '✓' : ''}</div>
-              <span class="prob-name">${p}</span>
-              <div class="diff-dot diff-${grp.diff}"></div>
-            </div>
-          `;
-        }).join('')}
-      </div>
-    </div>
-  `).join('');
-}
-
-function toggleSection(card, header, body) {
-  const isOpen = card.classList.contains('open');
-  card.classList.toggle('open');
-  body.classList.toggle('visible');
-  header.setAttribute('aria-expanded', !isOpen);
-}
-
-function updateRings() {
-  document.querySelectorAll('.section-progress-ring').forEach(ring => {
-    const total = parseInt(ring.dataset.total);
-    const secId = ring.dataset.section;
-    // Count done for this section
-    let doneCount = 0;
-    for (const phase of ROADMAP) {
-      for (const sec of phase.sections) {
-        if (sec.id === secId) {
-          for (const grp of sec.groups) {
-            for (const p of grp.problems) {
-              if (done[problemId(sec.id, grp.label, p)]) doneCount++;
-            }
-          }
-        }
-      }
-    }
-    ring.dataset.done = doneCount;
-    const circumference = 2 * Math.PI * 13;
-    const offset = circumference - (doneCount / total) * circumference;
-    const fill = ring.querySelector('.ring-fill');
-    if (fill) fill.style.strokeDashoffset = offset;
-    const text = ring.querySelector('.ring-text');
-    if (text) text.textContent = `${doneCount}/${total}`;
-  });
-}
-
-// ─────────────────────────────────────────────
-// EVENTS
-// ─────────────────────────────────────────────
-document.getElementById('roadmap').addEventListener('click', e => {
-  const chip = e.target.closest('.problem-chip');
-  if (!chip) return;
-  const id = chip.dataset.probId;
-  done[id] = !done[id];
-  saveDone();
-  // Toggle classes in-place for snappy feel
-  chip.classList.toggle('done', done[id]);
-  const circle = chip.querySelector('.check-circle');
-  circle.textContent = done[id] ? '✓' : '';
-  const name = chip.querySelector('.prob-name');
-  updateGlobalProgress();
-  updateRings();
-});
-
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    currentFilter = btn.dataset.filter;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    render();
-  });
-});
-
-document.getElementById('search-input').addEventListener('input', e => {
-  searchQuery = e.target.value.trim().toLowerCase();
-  render();
-});
-
-// ─────────────────────────────────────────────
-// INIT
-// ─────────────────────────────────────────────
-render();
-</script>
-</body>
-</html>
+  // ↑ Add more curated entries any time. Other problems
